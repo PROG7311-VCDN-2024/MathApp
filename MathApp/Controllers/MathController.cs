@@ -20,13 +20,6 @@ namespace MathApp.Controllers
             _context = context;
         }
 
-        
-        public async Task<IActionResult> History()
-        {
-            return View(await _context.MathCalculations.ToListAsync());
-        }
-
-        
         public IActionResult Calculate()
         {
             List<SelectListItem> operations = new List<SelectListItem> {
@@ -78,8 +71,13 @@ namespace MathApp.Controllers
             return View();
 
             
-            // return RedirectToAction("Calculate"); // What does this do?
+            // return RedirectToAction("Calculate");
             
+        }
+
+        public async Task<IActionResult> History()
+        {
+            return View(await _context.MathCalculations.ToListAsync());
         }
 
         public IActionResult Clear()
