@@ -1,3 +1,7 @@
+using MathApp.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
 namespace MathApp
 {
     public class Program
@@ -8,6 +12,9 @@ namespace MathApp
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<MathDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("Math_DB")));
 
             var app = builder.Build();
 
@@ -28,7 +35,7 @@ namespace MathApp
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Math}/{action=Calculate}/{id?}");
 
             app.Run();
         }

@@ -1,0 +1,68 @@
+﻿@model IEnumerable<MathApp.Models.MathCalculation>
+
+@{
+    ViewData["Title"] = "History";
+}
+
+<h4>History</h4>
+
+<form asp-action="Clear">
+    
+    <div class="form-group">
+        <input type="submit" value="Clear" class="btn btn-primary" style="float:right;" />
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                First Number
+            </th>
+            <th>
+                Operation
+            </th>
+            <th>
+                Second Number
+            </th>
+            <th>
+                Result
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstNumber)
+            </td>
+            <td>
+                @{
+                    switch (item.Operation)
+                    {
+                        case 1:
+                            <text>+</text>
+                            break;
+                        case 2:
+                            <text>-</text>
+                            break;
+                        case 3:
+                            <text>*</text>
+                            break;
+                        default:
+                            <text>/</text>
+                            break;
+                    }
+                }
+            </td>
+            <td>
+                
+                @Html.DisplayFor(modelItem => item.SecondNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Result)
+            </td>            
+        </tr>
+}
+    </tbody>
+</table>
