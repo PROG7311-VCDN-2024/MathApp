@@ -322,5 +322,5 @@ builder.Services.AddDbContext<MathDbContext>(options =>
         return RedirectToAction("History");
     }
     ```
-5. Test that the clear functionality works..
+5. Test that the clear functionality works.
 6. Clean up any unused controllers and views in your app.
