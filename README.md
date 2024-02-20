@@ -121,8 +121,8 @@ builder.Services.AddDbContext<MathDbContext>(options =>
         List<SelectListItem> operations = new List<SelectListItem> {
             new SelectListItem { Value = "1", Text = "+" },
             new SelectListItem { Value = "2", Text = "-" },
-            new SelectListItem { Value = "3", Text = "-" },
-            new SelectListItem { Value = "4", Text = "-" },
+            new SelectListItem { Value = "3", Text = "**" },
+            new SelectListItem { Value = "4", Text = "/" },
 
             };
 
