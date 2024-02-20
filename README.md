@@ -3,8 +3,8 @@
 The purpose of this repo is to outline the steps needed to build a dotnet app which interacts with a SQL DB for basic read/write functionality.
 
 ## Basic Features
-* User can enter two numbers, select an option and click calculate. Once calculated, the result is show to the user and written to the SQL DB
-* User can review previous calculations stored in the DB
+* User can enter two numbers, select an option and click calculate. Once calculated, the result is to be shown to the user and written to the SQL DB
+* User can review previous calculations stored in the DB (history)
 * User can clear previous calculations stored in the DB
 
 ## Pre-Requisites
@@ -132,7 +132,7 @@ builder.Services.AddDbContext<MathDbContext>(options =>
     }
     ```
 
-1. Now we add in the view. In the `Views -> Math`, create a new view called `Create.cshtml`.
+2. Now we add in the view. In the `Views -> Math`, create a new view called `Create.cshtml`.
    Before you include the following code, make sure you know what it does.
    Where is the dropdown being added? How is the dropdown data passed from controller to the view?
     
@@ -188,7 +188,7 @@ builder.Services.AddDbContext<MathDbContext>(options =>
     }
 
     ```
-1. Add in the following POST method to your Math Controller to process input from form submit, calculate, write DB and provide an output.
+3. Add in the following POST method to your Math Controller to process input from form submit, calculate, write DB and provide an output.
     ```
     [HttpPost]
     [ValidateAntiForgeryToken]
@@ -227,7 +227,7 @@ builder.Services.AddDbContext<MathDbContext>(options =>
             
     }
     ```
-1. Test your app and check the database to see if successfully written.
+4. Test your app and check the database to see if successfully written.
 
 
 
@@ -240,7 +240,7 @@ builder.Services.AddDbContext<MathDbContext>(options =>
         return View(await _context.MathCalculations.ToListAsync());
     }
     ```
-1. Add the following view under `Views -> Math` and name it `History.cstml`. This view shows history and also has a form that will process clearing. Its a single button form with no other input and it simply calls the relevant controller method (we will add this in next.
+2. Add the following view under `Views -> Math` and name it `History.cstml`. This view shows history and also has a form that will process clearing. Its a single button form with no other input and it simply calls the relevant controller method (we will add this in next.
     ```
     @model IEnumerable<MathApp.Models.MathCalculation>
 
@@ -311,8 +311,8 @@ builder.Services.AddDbContext<MathDbContext>(options =>
         </tbody>
     </table>
     ```
-1. Test your app and see that history loads.
-1. Now add in this controller method to process clearing history.
+3. Test your app and see that history loads.
+4. Now add in this controller method to process clearing history.
     ```
     public IActionResult Clear()
     {
@@ -322,5 +322,5 @@ builder.Services.AddDbContext<MathDbContext>(options =>
         return RedirectToAction("History");
     }
     ```
-1. Test that the clear functionality works..
-1. Clean up any unused controllers and views in your app.
+5. Test that the clear functionality works.
+6. Clean up any unused controllers and views in your app.
