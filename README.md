@@ -212,7 +212,7 @@ builder.Services.AddDbContext<MathDbContext>(options =>
                 break;
             default:
                 if (SecondNumber != 0)
-                    mathCalculation.Result = FirstNumber + SecondNumber;
+                    mathCalculation.Result = FirstNumber / SecondNumber;
                 break;
         }
 
