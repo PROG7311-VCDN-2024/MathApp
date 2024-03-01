@@ -8,13 +8,15 @@ using Microsoft.EntityFrameworkCore;
 using MathApp.Models;
 using System.Linq.Expressions;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Firebase.Auth;
+using NuGet.Common;
 
 namespace MathApp.Controllers
 {
     public class MathController : Controller
     {
         private readonly MathDbContext _context;
-
+        
         public MathController(MathDbContext context)
         {
             _context = context;
@@ -22,16 +24,23 @@ namespace MathApp.Controllers
 
         public IActionResult Calculate()
         {
-            List<SelectListItem> operations = new List<SelectListItem> {
-                new SelectListItem { Value = "1", Text = "+" },
-                new SelectListItem { Value = "2", Text = "-" },
-                new SelectListItem { Value = "3", Text = "*" },
-                new SelectListItem { Value = "4", Text = "/" },
+            var token = HttpContext.Session.GetString("currentUser");
 
-                };
+            if (token == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
+            List<SelectListItem> operations = new List<SelectListItem> {
+            new SelectListItem { Value = "1", Text = "+" },
+            new SelectListItem { Value = "2", Text = "-" },
+            new SelectListItem { Value = "3", Text = "*" },
+            new SelectListItem { Value = "4", Text = "/" },
+
+            };
 
             ViewBag.Operations = operations;
-    
+
             return View();
         }
 
@@ -39,10 +48,18 @@ namespace MathApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Calculate(decimal? FirstNumber, decimal? SecondNumber,int Operation)
         {
+            var token = HttpContext.Session.GetString("currentUser");
+
+            if (token == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             MathCalculation mathCalculation = new MathCalculation();
             mathCalculation.FirstNumber = FirstNumber;
             mathCalculation.SecondNumber = SecondNumber;
             mathCalculation.Operation = Operation;
+            mathCalculation.FirebaseUuid = token;
 
             switch (Operation)
             {
@@ -70,19 +87,32 @@ namespace MathApp.Controllers
             ViewBag.Result = mathCalculation.Result;
             return View();
 
-            
             // return RedirectToAction("Calculate");
             
         }
 
         public async Task<IActionResult> History()
         {
-            return View(await _context.MathCalculations.ToListAsync());
+            var token = HttpContext.Session.GetString("currentUser");
+
+            if (token == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
+            return View(await _context.MathCalculations.Where(m => m.FirebaseUuid.Equals(token)).ToListAsync());
         }
 
         public IActionResult Clear()
         {
-            _context.MathCalculations.RemoveRange(_context.MathCalculations);
+            var token = HttpContext.Session.GetString("currentUser");
+
+            if (token == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
+            _context.MathCalculations.RemoveRange(_context.MathCalculations.Where(m => m.FirebaseUuid.Equals(token)));
             _context.SaveChangesAsync();
 
             return RedirectToAction("History");

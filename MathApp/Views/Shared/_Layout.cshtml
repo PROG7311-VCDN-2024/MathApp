@@ -26,6 +26,21 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Math" asp-action="History">History</a>
                         </li>
                     </ul>
+                    <ul class="navbar-nav">
+                        @{
+                            if (Context.Session.GetString("currentUser") == null)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Login">Login</a>
+                                </li>
+                            } else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Logout">Logout</a>
+                                </li>                                
+                            }
+                        }
+                    </ul>
                 </div>
             </div>
         </nav>

@@ -14,4 +14,6 @@ public partial class MathCalculation
     public int? Operation { get; set; }
 
     public decimal? Result { get; set; }
+
+    public string? FirebaseUuid { get; set; }
 }
