@@ -11,7 +11,7 @@ namespace MathApp.Controllers
 
         public AuthController()
         {
-            auth = new FirebaseAuthProvider(new FirebaseConfig(""));
+            auth = new FirebaseAuthProvider(new FirebaseConfig(Environment.GetEnvironmentVariable("FirebaseMathApp")));
         }
 
         [HttpGet]
