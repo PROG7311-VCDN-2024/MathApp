@@ -72,6 +72,8 @@ namespace MathApp.Controllers
             {
                 var firebaseEx = JsonConvert.DeserializeObject<FirebaseErrorModel>(ex.ResponseData);
                 ModelState.AddModelError(String.Empty, firebaseEx.error.message);
+                Utils.AuthLogger.Instance.LogError(firebaseEx.error.message + " - User: " + login.Email + " - IP: " + HttpContext.Connection.RemoteIpAddress
+                    + " - Browser: " + Request.Headers.UserAgent);
                 return View(login);
             }
 
