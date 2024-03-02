@@ -55,11 +55,20 @@ namespace MathApp.Controllers
                 return RedirectToAction("Login", "Auth");
             }
 
-            MathCalculation mathCalculation = new MathCalculation();
-            mathCalculation.FirstNumber = FirstNumber;
-            mathCalculation.SecondNumber = SecondNumber;
-            mathCalculation.Operation = Operation;
-            mathCalculation.FirebaseUuid = token;
+            decimal? Result = 0;
+            MathCalculation mathCalculation;
+
+            try
+            {
+                mathCalculation = MathCalculation.Create(FirstNumber, SecondNumber, Operation, Result, token);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View();
+                throw;
+            }
+            
 
             switch (Operation)
             {
@@ -73,8 +82,7 @@ namespace MathApp.Controllers
                     mathCalculation.Result = FirstNumber * SecondNumber;
                     break;
                 default:
-                    if (SecondNumber != 0)
-                        mathCalculation.Result = FirstNumber / SecondNumber;
+                    mathCalculation.Result = FirstNumber / SecondNumber;
                     break;
             }
 
