@@ -20,10 +20,11 @@ It is highly recommended that you follow these steps in order:
 1. [Building the DB Context in MVC](/Guides/BuildingDBContext.md)
 1. [Building the Calculate Functionality](/Guides/BuildingCalculate.md)
 1. [Building the History Functionality](/Guides/BuildingHistory.md)
-1. Adding Firebase Auth to the project
-1. Building the Login
-1. Building the Register
-1. Building the Logout
+1. [Adding Firebase Auth to the project](/Guides/AddingAuth.md)
+1. [Building the Register](/Guides/AddingRegister.md)
+1. [Building the Login](/Guides/AddingLogin.md)
+1. [Building the Logout](/Guides/AddingLogout.md)
+1. [Checking for session variables to confirm login](/Guides/CheckingSessions.md)
 1. Amending the DB to accept UUID as FK
 1. Amending the code to cater for calculations per user
 1. Amending customising the menu buttons
