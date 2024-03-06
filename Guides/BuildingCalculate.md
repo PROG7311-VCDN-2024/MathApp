@@ -1,4 +1,4 @@
-## Building out the History Functionality
+## Building out the Calculate Functionality
 
 1.  Add a `MathController.cs` to your Controllers folder and include the following code (we will add more):
     ```
