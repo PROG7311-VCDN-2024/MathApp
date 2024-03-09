@@ -18,9 +18,9 @@ namespace MathApp
             });
 
             builder.Services.AddControllersWithViews();
-
+            
             builder.Services.AddDbContext<MathDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("Math_DB")));
+                options.UseSqlServer(Environment.GetEnvironmentVariable("Math_DB")));
 
             var app = builder.Build();
 
