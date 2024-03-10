@@ -42,6 +42,11 @@ namespace MathApp.Controllers
                 ModelState.AddModelError(String.Empty, firebaseEx.error.message);
                 return View(login);
             }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(String.Empty, ex.Message);
+                return View(login);
+            }
 
             return View();
 
@@ -74,6 +79,11 @@ namespace MathApp.Controllers
                 ModelState.AddModelError(String.Empty, firebaseEx.error.message);
                 Utils.AuthLogger.Instance.LogError(firebaseEx.error.message + " - User: " + login.Email + " - IP: " + HttpContext.Connection.RemoteIpAddress
                     + " - Browser: " + Request.Headers.UserAgent);
+                return View(login);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(String.Empty, ex.Message);
                 return View(login);
             }
 
