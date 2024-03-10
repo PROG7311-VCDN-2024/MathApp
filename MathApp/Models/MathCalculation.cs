@@ -1,8 +1,4 @@
-﻿using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
-using System;
-using System.Collections.Generic;
-
-namespace MathApp.Models;
+﻿namespace MathApp.Models;
 
 public partial class MathCalculation
 {
