@@ -32,16 +32,28 @@ Using the following commands in the Developer Command Prompt, connect the app to
             => optionsBuilder.UseSqlServer("Server=labVMH8OX\\SQLEXPRESS;Database=Math_DB;Trusted_Connection=True;TrustServerCertificate=True;");
     ```
 
+### Adding the Connection String in Environment variables - OPTION 1 (in the code)
 
-5. Add the following section to your appsettings.json (remember to update):
+1. Add the connection string for your SQL Server inside a system-wide environment variable named `Math_DB`.
+
+2. Add the following code to your Program.cs class after `builder.Services.AddControllersWithViews();`:
+    ```
+    builder.Services.AddDbContext<MathDbContext>(options =>
+                    options.UseSqlServer(Environment.GetEnvironmentVariable("Math_DB")));
+    ```
+
+### Adding Connection String in appsettings.json - OPTION 2 (was in the code previously)
+
+1. Add the following section to your appsettings.json (remember to update):
     ```
       "ConnectionStrings": {
         "Math_DB": "Server=labVMH8OX\\SQLEXPRESS;Database=Math_DB;Trusted_Connection=True;TrustServerCertificate=True;"
       },
     ```
 
-6. Add the following code to your Program.cs class after `builder.Services.AddControllersWithViews();`:
-```
-builder.Services.AddDbContext<MathDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("Math_DB")));
-```
+1. Add the following code to your Program.cs class after `builder.Services.AddControllersWithViews();`:
+    ```
+    builder.Services.AddDbContext<MathDbContext>(options =>
+                    options.UseSqlServer(builder.Configuration.GetConnectionString("Math_DB")));
+    ```
+
