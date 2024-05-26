@@ -73,17 +73,13 @@ jobs:
             git add .
             git commit -m "Deploy MathApp"
             git remote add azure https://$GIT_USERNAME:$GIT_PASSWORD@mathappforprog.scm.azurewebsites.net/mathappforprog.git
-            git push azure master --force
-
+            git push azure master
 
             # apk add zip
             # cd ~/project/MathAppFolder/
             # zip -r MathApp.zip .
             # az webapp config appsettings set --resource-group ebadam-rg --name mathappforprog --settings SCM_DO_BUILD_DURING_DEPLOYMENT=true WEBSITE_RUN_FROM_PACKAGE="1"
             # az webapp deploy --resource-group ebadam-rg --name mathappforprog --src-path MathApp.zip
-
-
-
 workflows:
   test_build_write_login_deploy:
     jobs:
