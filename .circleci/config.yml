@@ -154,17 +154,17 @@ jobs:
       - azure-cli/install
       - azure-cli/login-with-service-principal
       - attach_workspace:
-          at: C:\Users\circleci\project
+          at: ~/project
       - run:
           command: az webapp deployment source show --resource-group ebadam-rg --name mathappforprog7311
       - run:
           name: "Deploy Web App to Azure"
           command: |
-            apk add zip
-            cd ~/project/MathAppFolder/
-            zip -r MathApp.zip .
-            az webapp deployment source config-zip --resource-group ebadam-rg --name mathappforprog7311 --src MathApp.zip
-            az webapp config appsettings set --resource-group ebadam-rg --name mathappforprog7311 --settings SCM_DO_BUILD_DURING_DEPLOYMENT=true
+              apk add zip
+              cd ~/project/MathAppFolder/
+              zip -r MathApp.zip .            
+              az webapp deployment source config-zip --resource-group ebadam-rg --name mathappforprog7311 --src ./MathApp.zip             
+            
 workflows:
   test_build_write_login_deploy:
     jobs:
