@@ -40,7 +40,31 @@ jobs:
       - run:
           name: "Build Application according to some given configuration"
           command: dotnet.exe build --configuration Release
-  
+  write-to-folder:
+    description: Publish application to Folder
+    executor:
+      name: windows/default
+    steps:
+      - run:
+          name: "Publish to a subfolder"
+          command: dotnet.exe publish --configuration Release --output MathAppFolder
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - MathAppFolder
+  login-to-azure-and-deploy:
+    executor: azure-cli/azure-docker
+    steps:
+      - azure-cli/install
+      - azure-cli/login-with-service-principal
+      - attach_workspace:
+          at: ~/project
+      - run:
+          command: az webapp deployment source show --resource-group ebadam-rg --name mathappforprog
+      - run:
+          name: "Deploy Web App to Azure"
+          command: |
+            az webapp deployment source config-local-git --resource-group ebadam-rg --name mathappforprog
 
 workflows:
   test_and_build:
@@ -49,3 +73,9 @@ workflows:
       - build:
           requires:
             - test
+      - write-to-folder:
+          requires:
+            - build      
+      - login-to-azure-and-deploy:
+          requires:
+            - write-to-folder
