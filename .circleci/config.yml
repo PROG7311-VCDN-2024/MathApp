@@ -3,7 +3,8 @@ version: 2.1
 orbs:
   azure-cli: circleci/azure-cli@1.2.2
   windows: circleci/windows@5.0.0
-  github-super-linter: circleci/github-super-linter@1.0.1
+  sonarqube: clicklogiq/sonarqube@1.0.1
+  ansible-lint: orbss/ansible-lint@0.0.3
 
 jobs:
   test:
@@ -40,9 +41,6 @@ jobs:
           name: "Build Application according to some given configuration"
           command: dotnet.exe build --configuration Release
 workflows:
-  lint-code:
-    jobs:
-      - github-super-linter/lint
   test_and_build:
     jobs:
       - test
