@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  azure-cli: circleci/azure-cli@1.2.2
+  azure-cli: circleci/azure-cli@1.2.0
   windows: circleci/windows@5.0.0
   sonarqube: clicklogiq/sonarqube@1.0.1
   ansible-lint: orbss/ansible-lint@0.0.3
@@ -54,7 +54,7 @@ jobs:
           paths:
             - MathAppFolder
   login-to-azure-and-deploy:
-    executor: azure-cli/azure-docker:python-version
+    executor: azure-cli/azure-docker
     steps:
       - azure-cli/install
       - azure-cli/login-with-service-principal
