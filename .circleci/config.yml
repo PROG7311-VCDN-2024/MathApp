@@ -54,7 +54,7 @@ jobs:
           paths:
             - MathAppFolder
   login-to-azure-and-deploy:
-    executor: azure-cli/azure-docker:2.7
+    executor: azure-cli/azure-docker:python-version
     steps:
       - azure-cli/install
       - azure-cli/login-with-service-principal
