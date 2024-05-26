@@ -7,6 +7,12 @@ orbs:
   ansible-lint: orbss/ansible-lint@0.0.3
 
 jobs:
+  execute-ansible-lint:
+    executor: ansible-lint/defaut
+    steps:
+      - checkout
+      - ansible-lint/execute:
+          molecule-role-test: true
   test:
     description: Setup and run application tests
     executor:
@@ -40,12 +46,7 @@ jobs:
       - run:
           name: "Build Application according to some given configuration"
           command: dotnet.exe build --configuration Release
-  execute-ansible-lint:
-    executor: ansible-lint/defaut
-    steps:
-      - checkout
-      - ansible-lint/execute:
-          molecule-role-test: true
+  
 
 workflows:
   use-my-orb:
