@@ -3,8 +3,6 @@ version: 2.1
 orbs:
   azure-cli: circleci/azure-cli@1.2.2
   windows: circleci/windows@5.0.0
-  sonarqube: clicklogiq/sonarqube@1.0.1
-  ansible-lint: orbss/ansible-lint@0.0.3
 
 jobs:
   test:
@@ -65,7 +63,6 @@ jobs:
       - run:
           name: "Deploy Web App to Azure"
           command: |
-            $SUDO apt-get -qqy install git
             az webapp deployment source config-local-git --resource-group ebadam-rg --name mathappforprog
             cd ~/project/MathAppFolder/
             git init
