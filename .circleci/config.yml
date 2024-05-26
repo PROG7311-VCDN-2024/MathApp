@@ -45,6 +45,7 @@ jobs:
     executor:
       name: windows/default
     steps:
+      - checkout
       - run:
           name: "Publish to a subfolder"
           command: dotnet.exe publish --configuration Release --output MathAppFolder
