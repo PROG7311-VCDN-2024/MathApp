@@ -64,11 +64,10 @@ jobs:
           command: az webapp deployment source show --resource-group ebadam-rg --name mathappforprog
       - run:
           name: "Deploy Web App to Azure"
-          command: |
-            az webapp deployment source config-local-git --resource-group ebadam-rg --name mathappforprog
+          command: az webapp deployment source config-local-git --resource-group ebadam-rg --name mathappforprog
 
 workflows:
-  test_and_build:
+  test_build_write_login_deploy:
     jobs:
       - test
       - build:
