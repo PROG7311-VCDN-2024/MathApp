@@ -75,11 +75,12 @@ jobs:
             # git remote add azure https://$GIT_USERNAME:$GIT_PASSWORD@mathappforprog.scm.azurewebsites.net/mathappforprog.git
             # git push azure master --force
 
-
+            apk add zip
             cd ~/project/MathAppFolder/
             zip -r MathApp.zip .
             az webapp config appsettings set --resource-group ebadam-rg --name mathappforprog --settings WEBSITE_RUN_FROM_PACKAGE="1"
             az webapp deploy --resource-group ebadam-rg --name mathappforprog --src-path MathApp.zip
+
 
 
 workflows:
