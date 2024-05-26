@@ -58,6 +58,8 @@ jobs:
     steps:
       - azure-cli/install
       - azure-cli/login-with-service-principal
+      - run:
+          command: npm install git
       - attach_workspace:
           at: ~/project
       - run:
