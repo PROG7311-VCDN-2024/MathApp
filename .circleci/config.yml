@@ -1,7 +1,8 @@
 version: 2.1
 
 orbs:
-  windows: circleci/windows@2.2.0
+  azure-cli: circleci/azure-cli@1.2.2
+  windows: circleci/windows@5.0.0
 
 jobs:
   test:
