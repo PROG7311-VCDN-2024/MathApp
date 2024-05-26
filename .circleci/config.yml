@@ -64,7 +64,7 @@ jobs:
           name: "Deploy Web App to Azure"
           command: |
             apk add git
-            az webapp config appsettings set --resource-group ebadam-rg --name mathappforprog --settings SCM_DO_BUILD_DURING_DEPLOYMENT=false
+            az webapp config appsettings set --resource-group ebadam-rg --name mathappforprog --settings SCM_DO_BUILD_DURING_DEPLOYMENT=true
             az webapp deployment source config-local-git --resource-group ebadam-rg --name mathappforprog
             cd ~/project/MathAppFolder/
             git init
