@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  azure-cli: circleci/azure-cli@1.2.3
+  azure-cli: circleci/azure-cli@1.2.2
   windows: circleci/windows@5.0.0
   sonarqube: clicklogiq/sonarqube@1.0.1
   ansible-lint: orbss/ansible-lint@0.0.3
