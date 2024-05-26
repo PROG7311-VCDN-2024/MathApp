@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MathApp.Models;
+using MathApp.Utils;
 
 namespace MathApp.Controllers
 {
@@ -65,16 +66,16 @@ namespace MathApp.Controllers
             switch (Operation)
             {
                 case 1:
-                    mathCalculation.Result = FirstNumber + SecondNumber;
+                    mathCalculation.Result = CalculationsUtil.Add(FirstNumber, SecondNumber);
                     break;
                 case 2:
-                    mathCalculation.Result = FirstNumber - SecondNumber;
+                    mathCalculation.Result = CalculationsUtil.Subtract(FirstNumber, SecondNumber);
                     break;
                 case 3:
-                    mathCalculation.Result = FirstNumber * SecondNumber;
+                    mathCalculation.Result = CalculationsUtil.Multiply(FirstNumber, SecondNumber);
                     break;
                 default:
-                    mathCalculation.Result = FirstNumber / SecondNumber;
+                    mathCalculation.Result = CalculationsUtil.Divide(FirstNumber, SecondNumber);
                     break;
             }
 

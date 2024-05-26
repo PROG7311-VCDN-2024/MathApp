@@ -7,12 +7,6 @@ orbs:
   ansible-lint: orbss/ansible-lint@0.0.3
 
 jobs:
-  execute-ansible-lint:
-    executor: ansible-lint/defaut
-    steps:
-      - checkout
-      - ansible-lint/execute:
-          molecule-role-test: true
   test:
     description: Setup and run application tests
     executor:
@@ -49,9 +43,6 @@ jobs:
   
 
 workflows:
-  use-my-orb:
-    jobs:
-      - execute-ansible-lint
   test_and_build:
     jobs:
       - test
