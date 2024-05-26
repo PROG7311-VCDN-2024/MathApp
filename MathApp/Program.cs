@@ -10,7 +10,7 @@ namespace MathApp
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddSession(options =>
+                builder.Services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
                 options.Cookie.HttpOnly = true;
