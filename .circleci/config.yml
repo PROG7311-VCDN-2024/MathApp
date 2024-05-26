@@ -40,9 +40,16 @@ jobs:
       - run:
           name: "Build Application according to some given configuration"
           command: dotnet.exe build --configuration Release
+  execute-ansible-lint:
+    executor: ansible-lint/defaut
+    steps:
+      - checkout
+      - ansible-lint/execute:
+          molecule-role-test: true
 workflows:
   test_and_build:
     jobs:
+      - execute-ansible-lint
       - test
       - build:
           requires:
