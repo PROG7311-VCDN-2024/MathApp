@@ -78,7 +78,7 @@ jobs:
             apk add zip
             cd ~/project/MathAppFolder/
             zip -r MathApp.zip .
-            az webapp config appsettings set --resource-group ebadam-rg --name mathappforprog --settings WEBSITE_RUN_FROM_PACKAGE="1"
+            az webapp config appsettings set --resource-group ebadam-rg --name mathappforprog --settings SCM_DO_BUILD_DURING_DEPLOYMENT=true WEBSITE_RUN_FROM_PACKAGE="1" --type zip
             az webapp deploy --resource-group ebadam-rg --name mathappforprog --src-path MathApp.zip
 
 
