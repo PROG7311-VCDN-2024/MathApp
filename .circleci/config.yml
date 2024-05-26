@@ -73,7 +73,7 @@ jobs:
             git add .
             git commit -m "Deploy MathApp"
             git remote add azure https://$GIT_USERNAME:$GIT_PASSWORD@mathappforprog.scm.azurewebsites.net/mathappforprog.git
-            git push azure master
+            git push azure master --force
 
             # apk add zip
             # cd ~/project/MathAppFolder/
