@@ -64,16 +64,7 @@ jobs:
           command: az webapp deployment source show --resource-group ebadam-rg --name mathappforprog
       - run:
           name: "Deploy Web App to Azure"
-          command: |
-            az webapp deployment source config-local-git --resource-group ebadam-rg --name mathappforprog
-            cd ~/project/MathAppFolder/
-            git init
-            git config --global user.email "eb.adam@gmail.com"
-            git config --global user.name "ebadamZA"
-            git add .
-            git commit -m "Deploy MathApp"
-            git remote add azure https://$GIT_USERNAME:$GIT_PASSWORD@mathappforprog.scm.azurewebsites.net/mathappforprog.git
-            git push azure master --force
+          command: az webapp deployment source config-local-git --resource-group ebadam-rg --name mathappforprog
 
 workflows:
   test_build_write_login_deploy:
