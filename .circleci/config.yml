@@ -1,9 +1,107 @@
-version: 2.1
+# version: 2.1
 
+# orbs:
+#   azure-cli: circleci/azure-cli@1.2.2
+#   windows: circleci/windows@5.0.0
+
+# jobs:
+#   test:
+#     description: Setup and run application tests
+#     executor:
+#       name: windows/default
+#     steps:
+#       - checkout
+#       - restore_cache:
+#           keys:
+#             - dotnet-packages-v1-{{ checksum "MathApp/MathApp.csproj" }}
+#       - run:
+#           name: "Install project dependencies"
+#           command: dotnet.exe restore
+#       - save_cache:
+#           paths:
+#             - C:\Users\circleci\.nuget\packages
+#           key: dotnet-packages-v1-{{ checksum "MathApp/MathApp.csproj" }}
+#       - run:
+#           name: "Run Application Tests"
+#           command: dotnet.exe test -v n --results-directory:test_coverage --collect:"Code Coverage"
+#       - run:
+#           name: "Print Working Directory"
+#           command: pwd
+#       - store_artifacts:
+#           path: C:\Users\circleci\project\test_coverage
+#   build:
+#     description: Build application with Release configuration
+#     executor:
+#       name: windows/default
+#     steps:
+#       - checkout
+#       - run:
+#           name: "Build Application according to some given configuration"
+#           command: dotnet.exe build --configuration Release
+#   write-to-folder:
+#     description: Publish application to Folder
+#     executor:
+#       name: windows/default
+#     steps:
+#       - checkout
+#       - run:
+#           name: "Publish to a subfolder"
+#           command: dotnet.exe publish --configuration Release --output MathAppFolder
+#       - persist_to_workspace:
+#           root: ~/project
+#           paths:
+#             - MathAppFolder
+#   login-to-azure-and-deploy:
+#     executor: azure-cli/azure-docker
+#     steps:
+#       - azure-cli/install
+#       - azure-cli/login-with-service-principal
+#       - attach_workspace:
+#           at: ~/project
+#       - run:
+#           command: az webapp deployment source show --resource-group ebadam-rg --name mathappforprog
+#       - run:
+#           name: "Deploy Web App to Azure"
+#           command: |
+#             # apk add git
+#             # az webapp config appsettings set --resource-group ebadam-rg --name mathappforprog --settings SCM_DO_BUILD_DURING_DEPLOYMENT=true
+#             # az webapp deployment source config-local-git --resource-group ebadam-rg --name mathappforprog
+#             # cd ~/project/MathAppFolder/
+#             # git init
+#             # git config --global user.email "eb.adam@gmail.com"
+#             # git config --global user.name "ebadamZA"
+#             # git add .
+#             # git commit -m "Deploy MathApp"
+#             # git remote add azure https://$GIT_USERNAME:$GIT_PASSWORD@mathappforprog.scm.azurewebsites.net/mathappforprog.git
+#             # git push azure master --force
+
+#             apk add zip
+#             cd ~/project/MathAppFolder/
+#             zip -r MathApp.zip .            
+#             #az webapp deploy --resource-group ebadam-rg --name mathappforprog --src-path ./MathApp.zip
+            
+#             az webapp deployment source config-zip --resource-group ebadam-rg --name mathappforprog7311 --src ./MathApp.zip
+#             az webapp config appsettings set --resource-group ebadam-rg --name mathappforprog --settings SCM_DO_BUILD_DURING_DEPLOYMENT=true
+# workflows:
+#   test_build_write_login_deploy:
+#     jobs:
+#       - test
+#       - build:
+#           requires:
+#             - test
+#       - write-to-folder:
+#           requires:
+#             - build      
+#       - login-to-azure-and-deploy:
+#           requires:
+#             - write-to-folder
+
+version: 2.1
+ 
 orbs:
   azure-cli: circleci/azure-cli@1.2.2
   windows: circleci/windows@5.0.0
-
+ 
 jobs:
   test:
     description: Setup and run application tests
@@ -24,9 +122,6 @@ jobs:
       - run:
           name: "Run Application Tests"
           command: dotnet.exe test -v n --results-directory:test_coverage --collect:"Code Coverage"
-      - run:
-          name: "Print Working Directory"
-          command: pwd
       - store_artifacts:
           path: C:\Users\circleci\project\test_coverage
   build:
@@ -38,6 +133,8 @@ jobs:
       - run:
           name: "Build Application according to some given configuration"
           command: dotnet.exe build --configuration Release
+      - store_artifacts:
+          path: C:\Users\circleci\project\bin\Release
   write-to-folder:
     description: Publish application to Folder
     executor:
@@ -48,7 +145,7 @@ jobs:
           name: "Publish to a subfolder"
           command: dotnet.exe publish --configuration Release --output MathAppFolder
       - persist_to_workspace:
-          root: ~/project
+          root: C:\Users\circleci\project
           paths:
             - MathAppFolder
   login-to-azure-and-deploy:
@@ -57,31 +154,17 @@ jobs:
       - azure-cli/install
       - azure-cli/login-with-service-principal
       - attach_workspace:
-          at: ~/project
+          at: C:\Users\circleci\project
       - run:
-          command: az webapp deployment source show --resource-group ebadam-rg --name mathappforprog
+          command: az webapp deployment source show --resource-group ebadam-rg --name mathappforprog7311
       - run:
           name: "Deploy Web App to Azure"
           command: |
-            # apk add git
-            # az webapp config appsettings set --resource-group ebadam-rg --name mathappforprog --settings SCM_DO_BUILD_DURING_DEPLOYMENT=true
-            # az webapp deployment source config-local-git --resource-group ebadam-rg --name mathappforprog
-            # cd ~/project/MathAppFolder/
-            # git init
-            # git config --global user.email "eb.adam@gmail.com"
-            # git config --global user.name "ebadamZA"
-            # git add .
-            # git commit -m "Deploy MathApp"
-            # git remote add azure https://$GIT_USERNAME:$GIT_PASSWORD@mathappforprog.scm.azurewebsites.net/mathappforprog.git
-            # git push azure master --force
-
             apk add zip
-            cd ~/project/MathAppFolder/
-            zip -r MathApp.zip .            
-            #az webapp deploy --resource-group ebadam-rg --name mathappforprog --src-path ./MathApp.zip
-            
-            az webapp deployment source config-zip --resource-group ebadam-rg --name mathappforprog --src ./MathApp.zip
-            az webapp config appsettings set --resource-group ebadam-rg --name mathappforprog --settings SCM_DO_BUILD_DURING_DEPLOYMENT=true
+            cd C:\Users\circleci\project\MathAppFolder
+            zip -r MathApp.zip .
+            az webapp deployment source config-zip --resource-group ebadam-rg --name mathappforprog7311 --src MathApp.zip
+            az webapp config appsettings set --resource-group ebadam-rg --name mathappforprog7311 --settings SCM_DO_BUILD_DURING_DEPLOYMENT=true
 workflows:
   test_build_write_login_deploy:
     jobs:
@@ -91,7 +174,7 @@ workflows:
             - test
       - write-to-folder:
           requires:
-            - build      
+            - build
       - login-to-azure-and-deploy:
           requires:
-            - write-to-folder
+            - write-to-folder 
