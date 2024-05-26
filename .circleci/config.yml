@@ -54,7 +54,7 @@ jobs:
           paths:
             - MathAppFolder
   login-to-azure-and-deploy:
-    executor: azure-cli/azure-docker
+    executor: azure-cli/default
     steps:
       - azure-cli/install
       - azure-cli/login-with-service-principal
@@ -65,7 +65,6 @@ jobs:
       - run:
           name: "Deploy Web App to Azure"
           command: |
-            sudo apk add git
             az webapp deployment source config-local-git --resource-group ebadam-rg --name mathappforprog
             cd ~/project/MathAppFolder/
             git init
