@@ -46,10 +46,13 @@ jobs:
       - checkout
       - ansible-lint/execute:
           molecule-role-test: true
+
 workflows:
-  test_and_build:
+  use-my-orb:
     jobs:
       - execute-ansible-lint
+  test_and_build:
+    jobs:
       - test
       - build:
           requires:
