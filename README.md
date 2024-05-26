@@ -1,3 +1,5 @@
+[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/Ptrn8AFjp795m887NQTfma/XTzWpsLoScs3FweyT3VL5G/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/circleci/Ptrn8AFjp795m887NQTfma/XTzWpsLoScs3FweyT3VL5G/tree/master)
+
 # Math App in MVC with SQL DB, Singleton, Factory and FirebaseAuth
 
 The purpose of this repo is to outline the steps needed to build a dotnet app that interacts with a SQL DB for basic read/write functionality.
