@@ -12,7 +12,9 @@ jobs:
       name: windows/default
     steps:
       - checkout
-      - github-super-linter/lint
+      - lint-code:
+          jobs:
+             - github-super-linter/lint 
       - restore_cache:
           keys:
             - dotnet-packages-v1-{{ checksum "MathApp/MathApp.csproj" }}
