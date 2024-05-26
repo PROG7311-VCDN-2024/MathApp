@@ -12,6 +12,7 @@ jobs:
       name: windows/default
     steps:
       - checkout
+      - github-super-linter/lint
       - restore_cache:
           keys:
             - dotnet-packages-v1-{{ checksum "MathApp/MathApp.csproj" }}
@@ -40,9 +41,6 @@ jobs:
           name: "Build Application according to some given configuration"
           command: dotnet.exe build --configuration Release
 workflows:
-  lint-code:
-    jobs:
-      - github-super-linter/lint
   test_and_build:
     jobs:
       - test
