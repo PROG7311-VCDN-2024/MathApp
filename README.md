@@ -46,4 +46,5 @@ Videos
 * Part 1: https://youtu.be/-ufFSHOCLNw
 * Part 2: https://youtu.be/5LOL2ISmfLc
 
-
+Outcome:
+![CI/CD done!](https://github.com/PROG7311-VCDN-2024/MathApp/blob/master/Guides/cicd%20passed.JPG)
