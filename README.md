@@ -41,4 +41,9 @@ It is highly recommended that you follow these steps in order:
 1. [Amending the code to cater for calculations per user](/Guides/AmendingCodeToCalcPerUser.md)
 1. [Amending the menu buttons for our auth](/Guides/CustomizingMenuForAuth.md)
 
+CI/CD
+Videos
+* Part 1: https://youtu.be/-ufFSHOCLNw
+* Part 2: https://youtu.be/5LOL2ISmfLc
+
 
