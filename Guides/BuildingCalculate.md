@@ -41,7 +41,7 @@
     }
     ```
 
-2. Now we add in the view. In the `Views -> Math`, create a new view called `Create.cshtml`.
+2. Now we add in the view. In the `Views -> Math`, create a new view called `Calculate.cshtml`.
    Before you include the following code, make sure you know what it does.
    Where is the dropdown being added? How is the dropdown data passed from controller to the view?
     
